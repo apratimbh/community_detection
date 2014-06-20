@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class create_fgraph  {
 
-	public graph create(String edge_file, String feat_file) throws IOException
+	public fgraph create(String edge_file, String feat_file) throws IOException
 	{
 		fgraph g=new fgraph();
 		String line="";
@@ -23,7 +23,7 @@ public class create_fgraph  {
 			
 			node n1=null,n2=null;
 			
-			if(!g.if_exists(Integer.parseInt(part[0])))
+			if(!g.if_node_exists(Integer.parseInt(part[0])))
 			{
 				n1=new node(Integer.parseInt(part[0]));
 				g.add_node(n1);
@@ -33,7 +33,7 @@ public class create_fgraph  {
 				n1=g.get_node(Integer.parseInt(part[0]));
 			}
 
-			if(!g.if_exists(Integer.parseInt(part[1])))
+			if(!g.if_node_exists(Integer.parseInt(part[1])))
 			{
 				n2=new node(Integer.parseInt(part[1]));
 				g.add_node(n2);
@@ -49,6 +49,48 @@ public class create_fgraph  {
 			
 		}
 		br.close();
+		
+		br=new BufferedReader(new FileReader(feat_file));
+		while((line=br.readLine())!=null)
+		{
+			if(!line.matches("^[0-9]+[\t][0-9]+"))
+			{
+				throw new IOException("Error in file format");
+			}
+
+			String[] part=line.split("\t");
+			
+			node n=null;
+			
+			if(!g.if_node_exists(Integer.parseInt(part[0])))
+			{
+				//throw new IOException("Node does not exist: "+Integer.parseInt(part[0]));
+				n=new node(Integer.parseInt(part[0]));
+				g.add_node(n);
+			}
+			else
+			{
+				n=g.get_node(Integer.parseInt(part[0]));
+			}
+			
+			
+			feature f=null;
+			
+			if(!g.if_feature_exists(Integer.parseInt(part[1])))
+			{
+				f=new feature(Integer.parseInt(part[1]));
+				g.add_feature(f);
+			}
+			else
+			{
+				f=g.get_feature(Integer.parseInt(part[1]));
+			}
+			
+			g.add_feature_to_node(n, f);
+			
+		}
+		br.close();
+		
 		return g;
 	}
 	

@@ -9,4 +9,9 @@ public class feature {
 		this.num=num;
 	}
 	
+	public int index()
+	{
+		return this.num;
+	}
+	
 }

@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import corrrespondence_analysis.create_ca_table;
+
 public class cesna_conv {
 	
 	public void convert_feat_file(String file_name) throws IOException
@@ -101,10 +103,51 @@ public class cesna_conv {
 		
 	}
 	
+	public void conv_community_output_file(String file_name) throws IOException
+	{
+		String line="";
+		BufferedReader br=new BufferedReader(new FileReader(file_name));
+		BufferedWriter bw=new BufferedWriter(new FileWriter(file_name+"_n"));
+		while((line=br.readLine())!=null)
+		{
+			String[] part=line.split("\t");
+			if(part.length>2)
+			{
+				bw.write(merge_array2(part)+"\n");
+			}
+		}
+		
+		br.close();
+		bw.close();
+		
+		File old_file=new File(file_name);
+		File renamed_old_file=new File(file_name+"_old");
+		old_file.renameTo(renamed_old_file);
+		
+		System.out.println("Hello1");
+		
+		File new_file=new File(file_name+"_n");
+		File renamed_new_file=new File(file_name);
+		new_file.renameTo(renamed_new_file);
+		
+		System.out.println("Hello2 "+renamed_new_file.getName());
+		
+	}
+	
 	public String merge_array(String[] part)
 	{
 		String temp="";
 		for(int i=1;i<part.length;i++)
+		{
+			temp+=part[i]+" ";
+		}
+		return temp.substring(0,temp.length()-1);
+	}
+	
+	public String merge_array2(String[] part)
+	{
+		String temp="";
+		for(int i=0;i<part.length;i++)
 		{
 			temp+=part[i]+" ";
 		}
@@ -121,7 +164,7 @@ public class cesna_conv {
 		}*/
 		
 		try {
-			o.conv_circle_file("C:\\cygwin\\home\\cse\\CAA\\datasets\\facebook\\0.circles");
+			o.conv_community_output_file("C:\\cygwin\\home\\cse\\CAA\\snap-master\\examples\\cesna\\cmtyvv.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class community {
 	
-	ArrayList<node> node_list=new ArrayList<node>();
+	private ArrayList<node> node_list=new ArrayList<node>();
 	
 	public void add_node(node n)
 	{
@@ -16,4 +16,21 @@ public class community {
 		return node_list.get(idx);
 	}
 
+	public int size()
+	{
+		return node_list.size();
+	}
+	
+	public boolean contains(node n)
+	{
+		if(node_list.contains(n))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
 }

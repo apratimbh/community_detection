@@ -23,7 +23,7 @@ public class create_graph {
 			
 			node n1=null,n2=null;
 			
-			if(!g.if_exists(Integer.parseInt(part[0])))
+			if(!g.if_node_exists(Integer.parseInt(part[0])))
 			{
 				n1=new node(Integer.parseInt(part[0]));
 				g.add_node(n1);
@@ -33,7 +33,7 @@ public class create_graph {
 				n1=g.get_node(Integer.parseInt(part[0]));
 			}
 
-			if(!g.if_exists(Integer.parseInt(part[1])))
+			if(!g.if_node_exists(Integer.parseInt(part[1])))
 			{
 				n2=new node(Integer.parseInt(part[1]));
 				g.add_node(n2);
