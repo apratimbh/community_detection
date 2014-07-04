@@ -51,4 +51,9 @@ public class graph {
 		return this.node_list.size();
 	}
 	
+	public int get_number_of_edges()
+	{
+		return this.edge_list.size();
+	}
+	
 }

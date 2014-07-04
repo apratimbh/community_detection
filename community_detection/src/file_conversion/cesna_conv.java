@@ -14,6 +14,63 @@ import corrrespondence_analysis.create_ca_table;
 
 public class cesna_conv {
 	
+	public void convert_edge_file(String file_name) throws IOException
+	{
+		String line="";
+		BufferedReader br=new BufferedReader(new FileReader(file_name));
+		BufferedWriter bw=new BufferedWriter(new FileWriter(file_name+"_n"));
+		
+		while((line=br.readLine())!=null)
+		{
+			String[] part=line.split(" ");
+			bw.write(part[0]+"\t"+part[1]+"\n");
+		}
+		
+
+		
+		br.close();
+		bw.close();
+		
+		File old_file=new File(file_name);
+		File renamed_old_file=new File(file_name+"_old");
+		old_file.renameTo(renamed_old_file);
+		
+		File new_file=new File(file_name+"_n");
+		File renamed_new_file=new File(file_name);
+		new_file.renameTo(renamed_new_file);
+	}
+	
+	public void convert_node_name_file(String file_name) throws IOException
+	{
+		String line="";
+		BufferedReader br=new BufferedReader(new FileReader(file_name));
+		BufferedWriter bw=new BufferedWriter(new FileWriter(file_name+"_n"));
+		
+		while((line=br.readLine())!=null)
+		{
+			String[] part=line.split(" ");
+			String tmp="";
+			for(String ntmp:part)
+			{
+				tmp+=ntmp+"\t";
+			}
+			bw.write(tmp+"\n");
+		}
+		
+
+		
+		br.close();
+		bw.close();
+		
+		File old_file=new File(file_name);
+		File renamed_old_file=new File(file_name+"_old");
+		old_file.renameTo(renamed_old_file);
+		
+		File new_file=new File(file_name+"_n");
+		File renamed_new_file=new File(file_name);
+		new_file.renameTo(renamed_new_file);
+	}
+	
 	public void convert_feat_file(String file_name) throws IOException
 	{
 		String line="";
@@ -157,18 +214,32 @@ public class cesna_conv {
 	public static void main(String[] args)
 	{
 		cesna_conv o=new cesna_conv();
-		/*try {
-			o.convert_feat_file("C:\\cygwin\\home\\cse\\CAA\\snap-master\\examples\\cesna\\0.nodefeat");
+		
+		try {
+			o.convert_edge_file("C:\\cygwin\\home\\cse\\CAA\\snap-master\\examples\\cesna\\107.edges");
 		} catch (IOException e) {
 			e.printStackTrace();
-		}*/
+		}
 		
+		/*try {
+			o.convert_feat_file("C:\\cygwin\\home\\cse\\CAA\\snap-master\\examples\\cesna\\107.nodefeat");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			o.conv_circle_file("C:\\cygwin\\home\\cse\\CAA\\snap-master\\examples\\cesna\\107.circles");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		/*
 		try {
 			o.conv_community_output_file("C:\\cygwin\\home\\cse\\CAA\\snap-master\\examples\\cesna\\cmtyvv.txt");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 	}
 	
 	

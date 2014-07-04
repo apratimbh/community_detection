@@ -19,6 +19,33 @@ public class fgraph extends graph {
 		adj_list.put(n, le);
 	}
 	
+	public boolean is_connected(node n1,node n2)
+	{
+		ArrayList<edge> e_list=adj_list.get(n1);
+		for(edge e:e_list)
+		{
+			if((e.n1==n1&&e.n2==n2)||(e.n1==n2&&e.n2==n1))
+			{
+				return true;
+			}
+		}
+		 e_list=adj_list.get(n2);
+			for(edge e:e_list)
+			{
+				if((e.n1==n1&&e.n2==n2)||(e.n1==n2&&e.n2==n1))
+				{
+					return true;
+				}
+			}
+		return false;
+	}
+	
+	public void add_edge(edge e)
+	{
+		this.adj_list.get(e.n1).add(e);
+		this.edge_list.add(e);
+	}
+	
 	public ArrayList<edge> get_edge_list(node n)
 	{
 		return adj_list.get(n);
